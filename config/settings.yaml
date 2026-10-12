@@ -1,0 +1,41 @@
+# Pengaturan non-rahasia. Rahasia (API key/token) ada di .env, BUKAN di sini.
+app:
+  name: Jarvis
+  owner: Fachry
+  timezone: Asia/Makassar
+
+llm:
+  # offline = tanpa LLM (aturan kata kunci) | cloud = Claude | local = Ollama | hybrid = lokal untuk tugas ringan, cloud untuk menulis
+  mode: hybrid
+  cloud_model: claude-sonnet-5-5
+  local_model: qwen2.5:7b        # muat di Ryzen 5 / 16GB (lambat tanpa GPU: cukup untuk klasifikasi)
+  ollama_url: http://127.0.0.1:11434
+
+privacy:
+  redact_for_cloud: true         # OTP, nomor kartu, NIK, password disamarkan sebelum ke LLM cloud
+
+notify:
+  min_priority: high             # high | normal | low — ambang notifikasi proaktif
+  digest_hour: 7                 # ringkasan pagi 07:00 (-1 untuk mematikan)
+
+triage:
+  use_llm: true
+  vip_senders: []                # kata/nama yang selalu dianggap penting, mis. ["annisa", "dosen"]
+
+notifications:
+  dedup_seconds: 300
+  ignore_apps: [com.android.systemui, com.miui.securitycenter, com.coloros.safecenter, com.iqoo.secure, android]
+
+email:
+  poll_seconds: 120
+  query: "is:unread in:inbox"
+
+instagram:
+  mode: notifications            # notifications (akun pribadi) | graph_api (akun Business/Creator)
+
+telegram:
+  enabled: true
+
+skills:
+  disabled: []                   # mis. [instagram]
+  extra_dirs: []                 # folder tambahan berisi plugin *.py milik Anda
